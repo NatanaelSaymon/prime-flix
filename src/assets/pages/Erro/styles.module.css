@@ -1,0 +1,33 @@
+.erro__container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    height: calc(100vh - 60px);
+}
+
+.erro__container h1 {
+    font-size: 120px;
+    letter-spacing: 5px;
+}
+
+.erro__container p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.btn__back {
+    background-color: #116fdb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    background-color: #116fdb;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}

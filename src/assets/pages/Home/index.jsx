@@ -6,6 +6,7 @@ import styles from './styles.module.css'
 export function Home() {
 
     const [filmes, setFilmes] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect( () => {
         async function loadFilmes() {
@@ -18,8 +19,8 @@ export function Home() {
                     }
                 })
 
-                //console.log('reponse', response.data.results.slice(0, 10))
-                setFilmes(response.data.results)
+                setFilmes(response.data.results.slice(0, 10))
+                setLoading(false)
             }
 
             catch(err) {
@@ -29,6 +30,15 @@ export function Home() {
 
         loadFilmes()
     }, [])
+
+    if(loading){
+        return(
+            <div className={styles.loading}>
+                <h2>Carregando filme</h2>
+                <div className={styles.loader}></div>
+            </div>
+        )
+    }
 
     return(
         <div className={styles.container}>

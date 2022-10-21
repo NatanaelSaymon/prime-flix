@@ -19,7 +19,9 @@ export function Home() {
                     }
                 })
 
+                //API tras 20 filmes, usamos o slice para trazer apenas 10
                 setFilmes(response.data.results.slice(0, 10))
+
                 setLoading(false)
             }
 

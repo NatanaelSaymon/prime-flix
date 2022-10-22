@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import api from '../../services/api'
+import styles from './styles.module.css'
 
 export function Filme() {
 
     const { id } = useParams();
+    const navigate = useNavigate()
     const [datails, setDatails] = useState({})
     const [loading, setLoading] = useState(true)
 
@@ -27,6 +29,7 @@ export function Filme() {
 
             catch(error) {
                 console.log('Nooooooo, we got an error', error)
+                navigate("/", { replace: true })
             }
             
         }
@@ -35,9 +38,9 @@ export function Filme() {
         
         console.log(datails)
 
-        return () => {
-            console.log('Componente foi desmontado')
-        }
+        // return () => {
+        //     console.log('Componente foi desmontado')
+        // }
     }, [])
 
 
@@ -50,12 +53,25 @@ export function Filme() {
     }
 
     return(
-        <div className="filme-info">
+        <div className={styles.filme__info}>
             <h1>{datails.title}</h1>
             <img src={`https://image.tmdb.org/t/p/original/${datails.backdrop_path}`} alt={datails.title} />
             <h3>Sinopse:</h3>
             <p>{datails.overview}</p>
             <p><strong>Avaliação: {datails.vote_average} / 10</strong></p>
+
+            <div className={styles.actions}>
+                <button className={styles.actions__btn}>Salvar</button>
+
+                <a 
+                    href={`https://www.youtube.com/results?search_query=${datails.title} trailer`} 
+                    target="_blank" 
+                    className={styles.actions__btn}
+                    rel="external"
+                >
+                    Trailer
+                </a>
+            </div>
         </div>
     )
 }

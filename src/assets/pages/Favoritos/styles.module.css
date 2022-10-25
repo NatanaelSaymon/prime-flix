@@ -1,0 +1,41 @@
+.meus-filmes__container {
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.meus-filmes__container h1 {
+    margin-bottom: 20px;
+}
+
+.meus-filmes__titles {
+    font-size: 20px;
+}
+
+.meus-filmes__container ul li {
+    list-style: none;
+}
+
+.meus-filmes__container ul {
+    width: 720px;
+}
+
+.meus-filmes__container li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px
+}
+
+.meus-filmes__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.meus-filmes__actions a {
+    margin-right: 10px;
+}

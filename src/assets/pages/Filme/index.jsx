@@ -7,7 +7,7 @@ export function Filme() {
 
     const { id } = useParams();
     const navigate = useNavigate()
-    const [datails, setDatails] = useState({})
+    const [details, setdetails] = useState({})
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export function Filme() {
                     }
                 })
     
-                setDatails(response.data)
+                setdetails(response.data)
                 setLoading(false)
 
             }
@@ -36,12 +36,37 @@ export function Filme() {
 
         loadDetails()
         
-        console.log(datails)
+        console.log(details)
 
         // return () => {
         //     console.log('Componente foi desmontado')
         // }
     }, [])
+
+    function salvarFilme() {
+        const minhaLista = localStorage.getItem('filmes')
+
+        let filmesSalvo;
+
+        if(minhaLista) {
+            filmesSalvo = JSON.parse(minhaLista)
+        } else {
+            filmesSalvo = []
+        }
+
+        const hasFilme = filmesSalvo.some(filme => filme.id === details.id)
+
+        if(hasFilme) {
+            alert('ESSE FILME JÁ EXISTE')
+            return
+        }
+
+
+        filmesSalvo.push(details)
+        localStorage.setItem("filmes", JSON.stringify(filmesSalvo))
+        console.log('filme adicionado')
+
+    }
 
 
     if(loading){
@@ -54,17 +79,17 @@ export function Filme() {
 
     return(
         <div className={styles.filme__info}>
-            <h1>{datails.title}</h1>
-            <img src={`https://image.tmdb.org/t/p/original/${datails.backdrop_path}`} alt={datails.title} />
+            <h1>{details.title}</h1>
+            <img src={`https://image.tmdb.org/t/p/original/${details.backdrop_path}`} alt={details.title} />
             <h3>Sinopse:</h3>
-            <p>{datails.overview}</p>
-            <p><strong>Avaliação: {datails.vote_average} / 10</strong></p>
+            <p>{details.overview}</p>
+            <p><strong>Avaliação: {details.vote_average} / 10</strong></p>
 
             <div className={styles.actions}>
-                <button className={styles.actions__btn}>Salvar</button>
+                <button className={styles.actions__btn} onClick={salvarFilme}>Salvar</button>
 
                 <a 
-                    href={`https://www.youtube.com/results?search_query=${datails.title} trailer`} 
+                    href={`https://www.youtube.com/results?search_query=${details.title} trailer`} 
                     target="_blank" 
                     className={styles.actions__btn}
                     rel="external"

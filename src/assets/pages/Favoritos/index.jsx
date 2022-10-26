@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { toast } from 'react-toastify'
 import styles from './styles.module.css'
 
 export function Favoritos() {
@@ -13,10 +14,8 @@ export function Favoritos() {
     }, [])
 
     function handleExcluirFilme(id) {
-        console.log('id do filme', id)
-        //console.log(filmes)
-
         const newList = filmes.filter(filme => filme.id !== id)
+        toast.success('Filme removido com sucesso!');
 
         setFilmes(newList)
         localStorage.setItem("filmes", JSON.stringify(newList))

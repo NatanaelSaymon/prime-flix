@@ -12,9 +12,21 @@ export function Favoritos() {
         setFilmes(JSON.parse(minhaLista) || [])
     }, [])
 
+    function handleExcluirFilme(id) {
+        console.log('id do filme', id)
+        //console.log(filmes)
+
+        const newList = filmes.filter(filme => filme.id !== id)
+
+        setFilmes(newList)
+        localStorage.setItem("filmes", JSON.stringify(newList))
+    }
+
     return(
         <div className={styles['meus-filmes__container']}>
             <h1>Meus Filmes</h1>
+
+            {filmes.length === 0 && <span>Você não possui filmes salvos ;(</span>}
 
             <ul>
                 {filmes.map(filme => {
@@ -24,12 +36,13 @@ export function Favoritos() {
                             
                             <div className={styles['meus-filmes__actions']}>
                                 <Link to={`/filme/${filme.id}`}>Acessar</Link>
-                                <button>Excluir</button>
+                                <button onClick={() => handleExcluirFilme(filme.id)}>Excluir</button>
                             </div>
                         </li>
                     )
                 })}
             </ul>
+            
         </div>
 
     )
